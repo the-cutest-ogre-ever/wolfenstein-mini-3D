@@ -11,6 +11,16 @@
 #include "minilibx/mlx.h"
 #include "ubuntu_keys.h"
 
+typedef struct	s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+}				t_img;
+
 typedef struct	s_player
 {
 	char orientation;
@@ -32,6 +42,17 @@ typedef struct	s_session
 	int ceiling_color[3];
 
 }				t_session;
+
+typedef struct	s_game
+{
+	void *mlx;
+	void *win;
+	t_img img;
+
+	t_list *map;
+	int cols;
+	int rows;
+}	t_game
 
 void save_map(int fd, t_session *session);
 void parse_setting_file(char *file_name, t_session *session);

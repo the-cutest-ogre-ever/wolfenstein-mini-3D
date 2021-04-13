@@ -19,7 +19,7 @@ MLX_A =			minilibx/libmlx_Linux.a
 INCLUDES =		ubuntu_keys.h includes.h
 
 SRCS =			map_handler.c player_handler.c \
-				session_handler.c tests/02_main_keys_handler.c
+				session_handler.c tests/04_main_print_map.c
 
 .PONY: all, clean, fclean, re
 
