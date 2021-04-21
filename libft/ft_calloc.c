@@ -14,7 +14,7 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *buffer;
+	void	*buffer;
 
 	buffer = (void *)malloc(nmemb * size);
 	if (!buffer)

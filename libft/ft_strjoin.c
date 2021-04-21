@@ -20,7 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 && !s2)
 		return (0);
-	if (!(str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
 		return (0);
 	i = 0;
 	if (s1)

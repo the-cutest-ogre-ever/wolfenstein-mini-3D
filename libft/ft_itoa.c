@@ -29,7 +29,7 @@ static char	*set_num(char *str, int n, int length)
 	return (str);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		length;

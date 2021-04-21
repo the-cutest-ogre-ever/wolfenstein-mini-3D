@@ -14,8 +14,8 @@
 
 static int	count_w(char const *s, char c)
 {
-	int counter;
-	int prev_is_del;
+	int	counter;
+	int	prev_is_del;
 
 	counter = 0;
 	prev_is_del = 1;
@@ -35,7 +35,7 @@ static int	count_w(char const *s, char c)
 
 static int	count_l(char const *s, char c)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
 	while (*s && *s != c)
@@ -48,7 +48,7 @@ static int	count_l(char const *s, char c)
 
 static void	*free_array(char **s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -60,29 +60,29 @@ static void	*free_array(char **s)
 	return (0);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**array;
 	int		i;
 	int		j;
 
-	if (!s || !(array = (char **)malloc(sizeof(char *) * (count_w(s, c) + 1))))
+	array = (char **)malloc(sizeof(char *) * (count_w(s, c) + 1));
+	if (!s || !array)
 		return (0);
 	i = 0;
-	j = 0;
 	while (*s)
 	{
 		if (*s == c)
 			s++;
 		else
 		{
+			j = 0;
 			array[i] = (char *)malloc(sizeof(char) * (count_l(s, c) + 1));
 			if (!array[i])
 				return (free_array(array));
 			while (*s && *s != c)
 				array[i][j++] = *s++;
 			array[i++][j] = '\0';
-			j = 0;
 		}
 	}
 	array[i] = NULL;
