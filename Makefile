@@ -1,45 +1,46 @@
 NAME =			cub3D
 
 CC =			gcc
-
+FLAGS =			-Wall -Werror -Wextra
+MLX_FLAGS =		-lft -lmlx -lm -lX11 -lXext
+L_LIBS_DIR =	-L./libft -L./minilibx
 RM =			/bin/rm -rf
 
-CFLAGS =		-Wall  -Wextra
+SRC_DIR =		./srcs
+OBJ_DIR =		./obj
 
-MLX_FLAGS =		-I/usr/include -Imlx_linux -Lmlx_linux -lmlx  -L/usr/lib -Imlx_linux  -lXext -lX11 -lm -lz
+LIBFT_DIR =		./libft
+MINILIBX_DIR =	./minilibx
 
-LIBFT =			-I.libft/ -lft
+INCLUDES_DIR =	$(SRC_DIR) $(LIBFT_DIR) $(MINILIBX_DIR)
+INCLUDES =		$(wildcard $(INCLUDES_DIR)/*.h)
 
-LIBFT_A =		./libft/libft.a
+SRCS =			$(wildcard $(SRC_DIR)/*.c)
+OBJS =			$(SRC_ALL:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-MLX =			-I.minilibx/ -lmlx
+.PONY: libft, minilibx, all, clean, fclean, re
 
-MLX_A =			minilibx/libmlx_Linux.a
+all:			$(OBJ_DIR) libft minilibx $(NAME)
 
-INCLUDES =		ubuntu_keys.h includes.h
+$(NAME):		$(OBJS)
+				@$(CC) $(FLAGS) $(addprefix -I, $(INCLUDES_DIR)) $(OBJS) $(L_LIBS_DIR) $(MLX_FLAGS) -o $@
 
-SRCS =			map_handler.c player_handler.c \
-				session_handler.c tests/04_main_print_map.c
+$(OBJ_ALL): 	$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLLUDES)
+				@$(CC) $(FLAGS) -c $(addprefix -I, $(INCLUDES_DIR)) $< $(L_LIBS_DIR) $(MLX_FLAGS) -o $@
 
-.PONY: all, clean, fclean, re
+libft :			$(LIBFT_DIR)
+				@make bonus -C $<
 
-OBJS =			$(SRCS:.c=.o)
-
-all:			$(NAME)
-
-$(NAME): 		$(OBJS)
-				@make bonus -C ./libft/
-				@make -C ./minilibx/
-				$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_A) $(MLX_A) $(MLX) $(MLX_FLAGS)
+minilibx :		$(MINILIBX_DIR)
+				@make -C $<
 
 clean :
 				$(RM) $(OBJS)
-				@make -C libft/ clean
-				@make -C minilibx/ clean
-
+				@make -C $(LIBFT_DIR) clean
+				@make -C $(MINILIBX_DIR) clean
 
 fclean :		clean
 				$(RM) $(NAME)
-				@make -C libft/ fclean
+				@make -C $(LIBFT_DIR) fclean
 
 re:				fclean all

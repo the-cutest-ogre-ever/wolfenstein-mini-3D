@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include "../includes.h"
+#include "../srcs/includes.h"
 
 # define TILE_SIZE 32
 # define WIDTH COLS * TILE_SIZE
@@ -10,7 +10,7 @@
 
 # define TO_COORD(X, Y) ((int)floor(Y) * WIDTH + (int)floor(X))
 
-#include "../includes.h"
+#include "../srcs/includes.h"
 
 int get_col_count(t_list *map)
 {

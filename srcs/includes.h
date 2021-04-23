@@ -7,8 +7,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "libft/libft.h"
-#include "minilibx/mlx.h"
+#include "../libft/libft.h"
+#include "../minilibx/mlx.h"
 #include "ubuntu_keys.h"
 
 typedef struct	s_img

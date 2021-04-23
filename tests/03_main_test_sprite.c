@@ -1,4 +1,4 @@
-#include "../includes.h"
+#include "../srcs/includes.h"
 
 typedef struct  s_vars {
 	void        *mlx;
