@@ -1,4 +1,4 @@
-#include "../includes.h"
+#include "libft.h"
 
 int	has_eol(char *s)
 {

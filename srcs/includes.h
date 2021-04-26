@@ -52,7 +52,7 @@ typedef struct	s_game
 	t_list *map;
 	int cols;
 	int rows;
-}	t_game
+}	t_game;
 
 void save_map(int fd, t_session *session);
 void parse_setting_file(char *file_name, t_session *session);
