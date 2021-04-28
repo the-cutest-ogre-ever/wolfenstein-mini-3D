@@ -25,7 +25,7 @@ int is_map_valid(t_session *session)
 	x = 0;
 	prev = NULL;
 	next = NULL;
-	while (head)
+	while (head && ft_strlen(head->content))
 	{
 		y = 0;
 		line = (char *)head->content;
@@ -65,6 +65,12 @@ int is_map_valid(t_session *session)
 		head = head->next;
 		x++;
 	}
+	if (head && ft_strlen(head->content) == 0)
+	{
+		printf("empty lines in a map\n");
+		return (0);
+	}
+
 	return (1);
 }
 

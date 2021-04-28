@@ -1,7 +1,7 @@
-#ifndef CUB_INCLUDES_H
-#define CUB_INCLUDES_H
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
-#define BUFFER_SIZE 100
+# define BUFFER_SIZE 100
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -10,12 +10,12 @@
 #include "../libft/libft.h"
 #include "../minilibx/mlx.h"
 #include "ubuntu_keys.h"
+#include "error_codes.h"
 
 typedef struct	s_img
 {
 	void	*img;
 	int		*data;
-
 	int		size_l;
 	int		bpp;
 	int		endian;
@@ -54,7 +54,11 @@ typedef struct	s_game
 	int rows;
 }	t_game;
 
+int print_error(char *error_code);
 void save_map(int fd, t_session *session);
+void	parse_color(t_session *session, char *line, char obj);
+void	parse_texture_path(t_session *session, char *line, char t, int t_size);
+void	parse_resolution(t_session *session, char *line);
 void parse_setting_file(char *file_name, t_session *session);
 void print_list(t_list *head);
 void free_map(t_list **head);
