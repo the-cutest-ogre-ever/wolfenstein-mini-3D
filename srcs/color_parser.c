@@ -2,7 +2,7 @@
 
 static void	check_color(t_session *session, char *line, int i, char obj)
 {
-	if (line[i] && line[i] != ',' && line[i] != ' ' && line[i] != '\t')
+	if (line[i] && line[i] != ',' && line[i] != ' ')
 	{
 		if (line[i] && obj == 'C')
 			session->ceiling_color[2] = -1;
@@ -18,8 +18,7 @@ static int	parse_color_mini(t_session *session, char *line, int i, char obj)
 	k = 0;
 	while (k < 3 && line[i])
 	{
-		while (line[i] && !ft_isdigit(line[i]) && (line[i] == ' ' || line[i]
-				== '\t'))
+		while (line[i] && !ft_isdigit(line[i]) && line[i] == ' ' )
 			i++;
 		if (line[i] && ft_isdigit(line[i]) && obj == 'C')
 			session->ceiling_color[k] = ft_atoi(line + i);
@@ -46,7 +45,11 @@ void	parse_color(t_session *session, char *line, char obj)
 
 	i = 0;
 	while (line[i] && line[i] != obj)
+	{
+		if (line[i] != ' ')
+			return;
 		i++;
+	}
 	i++;
 	i = parse_color_mini(session, line, i, obj);
 	while (line[i++])

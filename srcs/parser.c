@@ -5,17 +5,16 @@ void	parse_resolution(t_session *session, char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t') && line[i] != 'R')
+	while (line[i] && line[i] == ' ')
 		i++;
-	i++;
-	while (line[i] && !ft_isdigit(line[i]) && (line[i] == ' ' || line[i]
-			== '\t'))
+	if (line[i] == 'R')
+		i++;
+	while (line[i] && !ft_isdigit(line[i]) && line[i] == ' ')
 		i++;
 	session->resolution[0] = ft_atoi(line + i);
 	while (line[i] && ft_isdigit(line[i]))
 		i++;
-	while (line[i] && !ft_isdigit(line[i]) && (line[i] == ' ' || line[i]
-			== '\t'))
+	while (line[i] && !ft_isdigit(line[i]) && line[i] == ' ')
 		i++;
 	if (line[i])
 		session->resolution[1] = ft_atoi(line + i);

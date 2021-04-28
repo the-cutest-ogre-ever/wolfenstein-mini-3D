@@ -38,19 +38,6 @@ void	print_session_info(t_session *session)
 		   session->floor_color[1], session->floor_color[2]);
 }
 
-int	is_session_valid(t_session *session)
-{
-	return (session->map && session->no && session->so && session->ea
-		&& session->we && session->s && session->resolution[0] >= 0
-		&& session->resolution[1] >= 0 && session->ceiling_color[0] >= 0
-		&& session->ceiling_color[1] >= 0 && session->ceiling_color[2] >= 0
-		&& session->floor_color[0] >= 0 && session->floor_color[1] >= 0
-		&& session->floor_color[2] >= 0 && session->ceiling_color[0] < 256
-		&& session->ceiling_color[1] < 256 && session->ceiling_color[2] < 256
-		&& session->floor_color[0] < 256 && session->floor_color[1] < 256
-		&& session->floor_color[2] < 256 && is_map_valid(session));
-}
-
 void	parse_texture_path(t_session *session, char *line, char t, int t_size)
 {
 	int	i;
@@ -59,9 +46,9 @@ void	parse_texture_path(t_session *session, char *line, char t, int t_size)
 	while (line[i] && line[i] != t)
 		i++;
 	i += t_size;
-	if (line[i] == ' ' || line[i] == '\t')
+	if (line[i] == ' ')
 	{
-		while (line[i] == ' ' || line[i] == '\t')
+		while (line[i] == ' ')
 			i++;
 		if (t == 'N')
 			session->no = ft_substr(line, i, ft_strlen(line) - i);
