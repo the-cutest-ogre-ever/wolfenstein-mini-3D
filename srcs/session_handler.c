@@ -5,7 +5,7 @@ t_session	*init_session(void)
 	t_session	*session;
 
 	session = (t_session *)malloc(sizeof(t_session));
-	session->player = NULL;
+	session->view.direction = '0';
 	session->resolution[0] = -1;
 	session->resolution[1] = -1;
 	session->map = NULL;
@@ -23,6 +23,15 @@ t_session	*init_session(void)
 	return (session);
 }
 
+void print_list(t_list *head)
+{
+	while (head)
+	{
+		printf("%s\n", (char *)head->content);
+		head = head->next;
+	}
+}
+
 void	print_session_info(t_session *session)
 {
 	printf("Resolution: %d %d\n", session->resolution[0],
@@ -38,35 +47,9 @@ void	print_session_info(t_session *session)
 		   session->floor_color[1], session->floor_color[2]);
 }
 
-void	parse_texture_path(t_session *session, char *line, char t, int t_size)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] != t)
-		i++;
-	i += t_size;
-	if (line[i] == ' ')
-	{
-		while (line[i] == ' ')
-			i++;
-		if (t == 'N')
-			session->no = ft_substr(line, i, ft_strlen(line) - i);
-		if (t == 'S' && t_size == 2)
-			session->so = ft_substr(line, i, ft_strlen(line) - i);
-		if (t == 'E')
-			session->ea = ft_substr(line, i, ft_strlen(line) - i);
-		if (t == 'W')
-			session->we = ft_substr(line, i, ft_strlen(line) - i);
-		if (t == 'S' && t_size == 1)
-			session->s = ft_substr(line, i, ft_strlen(line) - i);
-	}
-}
-
 void	free_session(t_session *session)
 {
 	free_map(&session->map);
-	free_player(session->player);
 	free(session->no);
 	free(session->so);
 	free(session->ea);

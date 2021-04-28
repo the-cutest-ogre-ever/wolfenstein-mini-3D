@@ -55,6 +55,57 @@ int	find_params(t_session *session, char *line, int i)
 	return (0);
 }
 
+void	parse_texture_path(t_session *session, char *line, char t, int t_size)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != t)
+		i++;
+	i += t_size;
+	if (line[i] == ' ')
+	{
+		while (line[i] == ' ')
+			i++;
+		if (t == 'N')
+			session->no = ft_substr(line, i, ft_strlen(line) - i);
+		if (t == 'S' && t_size == 2)
+			session->so = ft_substr(line, i, ft_strlen(line) - i);
+		if (t == 'E')
+			session->ea = ft_substr(line, i, ft_strlen(line) - i);
+		if (t == 'W')
+			session->we = ft_substr(line, i, ft_strlen(line) - i);
+		if (t == 'S' && t_size == 1)
+			session->s = ft_substr(line, i, ft_strlen(line) - i);
+	}
+}
+
+void save_map(int fd, t_session *session)
+{
+	char *line;
+	int empty = 1;
+
+	line = NULL;
+	while (empty && get_next_line(fd, &line))
+	{
+		if (ft_strlen(line) > 0)
+		{
+			ft_lstadd_back(&session->map, ft_lstnew(line));
+			empty = 0;
+		}
+		else
+			free(line);
+		line = NULL;
+	}
+	while (get_next_line(fd, &line))
+	{
+		ft_lstadd_back(&session->map, ft_lstnew(line));
+		line = NULL;
+	}
+	ft_lstadd_back(&session->map, ft_lstnew(line));
+}
+
+
 void	parse_setting_file(char *file_name, t_session *session)
 {
 	int		fd;

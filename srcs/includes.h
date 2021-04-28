@@ -21,16 +21,16 @@ typedef struct	s_img
 	int		endian;
 }				t_img;
 
-typedef struct	s_player
+typedef struct	s_view
 {
-	char orientation;
+	char direction;
 	int x;
 	int y;
-}				t_player;
+}				t_view;
 
 typedef struct	s_session
 {
-	t_player *player;
+	t_view view;
 	t_list *map;
 	int resolution[2];
 	char *no;
@@ -62,10 +62,11 @@ void	parse_resolution(t_session *session, char *line);
 void parse_setting_file(char *file_name, t_session *session);
 void print_list(t_list *head);
 void free_map(t_list **head);
+int	is_map_symbol(char c);
 int is_map_valid(t_session *session);
-t_player *init_player(int x, int y, char or);
-void free_player(t_player *player);
-void print_player_info(t_player *player);
+void	save_player(t_session *session, int x, int y, char direction);
+int	find_player(t_session *session);
+void	print_view(t_view view);
 t_session *init_session(void);
 void print_session_info(t_session *session);
 int is_session_valid(t_session *session);

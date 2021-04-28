@@ -10,14 +10,13 @@ int main(int argc, char **argv)
 		parse_setting_file(argv[1], session);
 		if (session)
 		{
-			print_session_info(session);
-			print_list(session->map);
-			if (session->player)
-				print_player_info(session->player);
 			if (is_session_valid(session))
 				printf(">>>>> SESSION IS VALID <<<<<\n");
 			else
 				printf(">>>>> SESSION IS INVALID <<<<<\n");
+			print_session_info(session);
+			print_list(session->map);
+			print_view(session->view);
 			free_session(session);
 		}
 	}
