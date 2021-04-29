@@ -65,7 +65,7 @@ int	is_map_valid(t_session *session)
 	}
 	if (head && ft_strlen(head->content) == 0)
 		return (print_error(ERROR_MAP_EMPTY_LINES));
-	return (find_player(session));
+	return (1);
 }
 
 void	free_map(t_list **head)

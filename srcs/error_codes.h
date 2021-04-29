@@ -22,5 +22,7 @@
 # define ERROR_MAP_EMPTY_LINES "empty lines in the map"
 # define ERROR_MAP_PLAYER_NO "no player"
 # define ERROR_MAP_PLAYER_TOO "too many players"
+# define ERROR_ARG "invalid arguments"
+# define ERROR_MEMORY "not enough memory"
 
 #endif

@@ -16,7 +16,7 @@ INCLUDES =		$(INCLUDES_DIR)/error_codes.h $(INCLUDES_DIR)/includes.h \
 SRC_DIR =		./srcs
 SRCS =			$(SRC_DIR)/map_handler.c $(SRC_DIR)/view_handler.c \
 				$(SRC_DIR)/session_handler.c $(SRC_DIR)/error_handler.c \
-				$(SRC_DIR)/01_main_map_validator.c $(SRC_DIR)/parser.c \
+				$(SRC_DIR)/main.c $(SRC_DIR)/parser.c \
 				$(SRC_DIR)/color_parser.c $(SRC_DIR)/validator.c
 
 OBJ_DIR =		./objs

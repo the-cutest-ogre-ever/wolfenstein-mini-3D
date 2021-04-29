@@ -45,7 +45,7 @@ static int	is_texture_exist(t_session *session)
 
 static int	is_player_exist(t_session *session)
 {
-	if (session->view.direction == '0')
+	if (session->view->direction == '0')
 		return (print_error(ERROR_MAP_PLAYER_NO));
 	return (1);
 }

@@ -5,6 +5,7 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+# include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "../libft/libft.h"
@@ -12,10 +13,16 @@
 #include "ubuntu_keys.h"
 #include "error_codes.h"
 
+# define XK_MISCELLANY
+# define XK_LATIN1
+# include <X11/keysymdef.h>
+
 typedef struct	s_img
 {
-	void	*img;
-	int		*data;
+	void	*img_ptr;
+	int		*img_data;
+	int		width;
+	int 	height;
 	int		size_l;
 	int		bpp;
 	int		endian;
@@ -24,35 +31,86 @@ typedef struct	s_img
 typedef struct	s_view
 {
 	char direction;
-	int x;
-	int y;
+	double x;
+	double y;
+	double z;
+	double view_ang_y;
+	double view_ang_p;
+	double view_dir_y;
+	double view_dir_p;
+	double wall_dist;
 }				t_view;
+
+typedef struct	s_win
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		x;
+	int		y;
+}				t_win;
+
+typedef struct	s_sprite
+{
+	struct s_sprite	*next;
+	struct s_sprite	*prev;
+	t_img					*text;
+	double				sprite_dist;
+	double				sprite_x;
+}				t_sprite;
+
+typedef struct	s_ray
+{
+	double			x;
+	double			y;
+	double			sin;
+	double			cos;
+	int				dir;
+	double			dist;
+	t_sprite	*sprite;
+}				t_ray;
 
 typedef struct	s_session
 {
-	t_view view;
+	int key_w;
+	int key_a;
+	int key_s;
+	int key_d;
+	int key_left;
+	int key_right;
+	int key_esc;
+	t_win  *win;
+	t_view *view;
 	t_list *map;
-	int resolution[2];
+	t_ray		*ray;
+	int		blk_x;
+	int		blk_y;
+	int		blk_z;
+	int max_x;
+	int max_y;
 	char *no;
 	char *so;
 	char *ea;
 	char *we;
 	char *s;
+	t_img	*no_text;
+	t_img	*ea_text;
+	t_img	*we_text;
+	t_img	*so_text;
+	t_img	*s_text;
+	int floor;
+	int ceil;
+	int resolution[2];
 	int floor_color[3];
 	int ceiling_color[3];
 
+
+	t_img		*img_0;
+	t_img		*img_1;
+	int			config_fd;
+
+
+
 }				t_session;
-
-typedef struct	s_game
-{
-	void *mlx;
-	void *win;
-	t_img img;
-
-	t_list *map;
-	int cols;
-	int rows;
-}	t_game;
 
 int print_error(char *error_code);
 void save_map(int fd, t_session *session);
@@ -67,9 +125,11 @@ int is_map_valid(t_session *session);
 void	save_player(t_session *session, int x, int y, char direction);
 int	find_player(t_session *session);
 void	print_view(t_view view);
-t_session *init_session(void);
+void init_session(t_session *session);
+void	destroy_session(t_session *session, char *error_code);
 void print_session_info(t_session *session);
 int is_session_valid(t_session *session);
 void free_session(t_session *session);
+void	window_setup(t_session *session);
 
 #endif
