@@ -8,7 +8,7 @@ int	print_error(char *error_code)
 		printf("%s%s\n", error_code, "\x1B[0m");
 	}
 	else
-		printf("exit without error\n");
+		printf("exit without error...\n");
 	exit(0);
 	//return (0);
 }

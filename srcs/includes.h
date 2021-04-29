@@ -12,9 +12,6 @@
 #include "../minilibx/mlx.h"
 #include "ubuntu_keys.h"
 #include "error_codes.h"
-
-# define XK_MISCELLANY
-# define XK_LATIN1
 # include <X11/keysymdef.h>
 
 typedef struct	s_img
@@ -39,6 +36,7 @@ typedef struct	s_view
 	double view_dir_y;
 	double view_dir_p;
 	double wall_dist;
+	double step;
 }				t_view;
 
 typedef struct	s_win
@@ -97,19 +95,13 @@ typedef struct	s_session
 	t_img	*we_text;
 	t_img	*so_text;
 	t_img	*s_text;
-	int floor;
-	int ceil;
+	int floor_color_code;
+	int ceil_color_code;
 	int resolution[2];
 	int floor_color[3];
 	int ceiling_color[3];
-
-
 	t_img		*img_0;
 	t_img		*img_1;
-	int			config_fd;
-
-
-
 }				t_session;
 
 int print_error(char *error_code);
@@ -130,6 +122,11 @@ void	destroy_session(t_session *session, char *error_code);
 void print_session_info(t_session *session);
 int is_session_valid(t_session *session);
 void free_session(t_session *session);
-void	window_setup(t_session *session);
+void	set_window(t_session *session);
+void	init_hooks(t_session *session);
+int esc_handler(t_session *session);
+int		press_handler(int keycode, t_session *session);
+int		release_handler(int keycode, t_session *session);
+void movement_handler(double ang, t_session *session);
 
 #endif

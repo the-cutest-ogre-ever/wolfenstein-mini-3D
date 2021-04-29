@@ -2,9 +2,19 @@
 
 void	save_player(t_session *session, int x, int y, char direction)
 {
-	session->view.x = x;
-	session->view.y = y;
-	session->view.direction = direction;
+	session->view->x = session->blk_x * x + session->blk_x / 2;
+	session->view->y = session->blk_y * y + session->blk_y / 2;
+	session->view->wall_dist = (double)session->blk_x / 6;
+	session->view->step = sqrt(2 * (double)session->blk_x / 10);
+	session->view->direction = direction;
+	if (direction == 'N')
+		session->view->view_dir_y = -M_PI_2;
+	if (direction == 'W')
+		session->view->view_dir_y = M_PI;
+	if (direction == 'S')
+		session->view->view_dir_y = M_PI_2;
+	if (direction == 'E')
+		session->view->view_dir_y = 0;
 }
 
 void	print_view(t_view view)
@@ -22,7 +32,7 @@ static int	check_pos(t_session *session, char *line, int max_x)
 	{
 		if (is_map_symbol(line[y]) == 3)
 		{
-			if (session->view.direction == '0')
+			if (session->view->direction == '0')
 				save_player(session, max_x, y, line[y]);
 			else
 				return (print_error(ERROR_MAP_PLAYER_TOO));
@@ -52,6 +62,10 @@ int	find_player(t_session *session)
 			max_y = y;
 		max_x++;
 	}
-	printf("MAXIMUM: \n\tmax_x: %d\tmax_y: %d\n", max_x, max_y);
+	if (max_x && max_y)
+	{
+		session->max_x = max_x;
+		session->max_y = max_y;
+	}
 	return (1);
 }

@@ -54,4 +54,12 @@ void	parse_color(t_session *session, char *line, char obj)
 	i = parse_color_mini(session, line, i, obj);
 	while (line[i++])
 		check_color(session, line, i, obj);
+	if (obj == 'F')
+		session->floor_color_code = 0 | (session->floor_color[0] << 16) |
+				(session->floor_color[1] << 8) | (session->floor_color[2] <<
+				0);
+	if (obj == 'C')
+		session->ceil_color_code = 0 | (session->ceiling_color[0] << 16) |
+									(session->ceiling_color[1] << 8) | (session->ceiling_color[2] <<
+																							  0);
 }

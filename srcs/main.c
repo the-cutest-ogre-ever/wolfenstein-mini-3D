@@ -53,8 +53,8 @@ void	start(char *congif_file, int save)
 		 */
 	} else
 	{
-		window_setup(session);
-		hook_initialize(session);
+		set_window(session);
+		init_hooks(session);
 	}
 }
 
