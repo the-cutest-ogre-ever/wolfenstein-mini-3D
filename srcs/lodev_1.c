@@ -19,6 +19,15 @@ void	free_sprites(t_sprite **sprites)
 	*sprites = NULL;
 }
 
+t_sprite *get_last_sprite(t_sprite *sprites)
+{
+	if (!sprites)
+		return (NULL);
+	while (sprites->next)
+		sprites = sprites->next;
+	return (sprites);
+}
+
 double get_sprite_x(double x, double y, t_session *session)
 {
 	double mid_dist;

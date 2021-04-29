@@ -21,7 +21,7 @@ void	session_exit(void)
 	exit(0);
 }
 */
-void	start(char *congif_file, int save)
+static void	start(char *congif_file, int save)
 {
 	t_session *session;
 

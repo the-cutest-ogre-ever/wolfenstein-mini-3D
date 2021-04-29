@@ -98,28 +98,3 @@ void init_session(t_session *session)
 	session->img_0 = NULL;
 	session->img_1 = NULL;
 }
-/*
-void print_list(t_list *head)
-{
-	while (head)
-	{
-		printf("%s\n", (char *)head->content);
-		head = head->next;
-	}
-}
-
-void	print_session_info(t_session *session)
-{
-	printf("Resolution: %d %d\n", session->resolution[0],
-		session->resolution[1]);
-	printf("NO texture path: %s\n", session->no);
-	printf("SO texture path: %s\n", session->so);
-	printf("EA texture path: %s\n", session->ea);
-	printf("WE texture path: %s\n", session->we);
-	printf("S texture path: %s\n", session->s);
-	printf("Ceiling color: %d,%d,%d\n", session->ceiling_color[0],
-		session->ceiling_color[1], session->ceiling_color[2]);
-	printf("Floor color: %d,%d,%d\n", session->floor_color[0],
-		   session->floor_color[1], session->floor_color[2]);
-}
-*/

@@ -12,6 +12,8 @@
 #include "../minilibx/mlx.h"
 #include "ubuntu_keys.h"
 #include "error_codes.h"
+# define XK_MISCELLANY
+# define XK_LATIN1
 # include <X11/keysymdef.h>
 
 typedef struct	s_img
@@ -104,31 +106,57 @@ typedef struct	s_session
 	t_img		*img_1;
 }				t_session;
 
-int print_error(char *error_code);
-void save_map(int fd, t_session *session);
 void	parse_color(t_session *session, char *line, char obj);
-void	parse_texture_path(t_session *session, char *line, char t, int t_size);
-void	parse_resolution(t_session *session, char *line);
-void parse_setting_file(char *file_name, t_session *session);
-void print_list(t_list *head);
-void free_map(t_list **head);
-int	is_map_symbol(char c);
-int is_map_valid(t_session *session);
-void	save_player(t_session *session, int x, int y, char direction);
-int	find_player(t_session *session);
-void	print_view(t_view view);
-void init_session(t_session *session);
-void	destroy_session(t_session *session, char *error_code);
-void print_session_info(t_session *session);
-int is_session_valid(t_session *session);
-void free_session(t_session *session);
-void	set_window(t_session *session);
-void	init_hooks(t_session *session);
+int	print_error(char *error_code);
 int esc_handler(t_session *session);
 int		press_handler(int keycode, t_session *session);
 int		release_handler(int keycode, t_session *session);
-void movement_handler(double ang, t_session *session);
-char get_map_elem(t_session *session, int x, int y);
+void	step_handler(t_session *session, char key);
+void	key_handler(t_session *session);
+int handle_game(t_session *session);
+void	set_frame_column(int x, double wall_dist, t_session *session);
+void	create_frame(t_session *session);
+t_img	*init_frame(void *mlx_ptr, int x, int y);
+char find_ray(int x, int y, t_session *session);
+void set_dir(double x_dist, double y_dist, t_session *session);
+void find_cross(double x, double y, t_session *session);
+int check_next_cell(t_session *session);
+double pass_ray(t_session *session, double ang, double m_ang);
+void	free_sprites(t_sprite **sprites);
+t_sprite *get_last_sprite(t_sprite *sprites);
+double get_sprite_x(double x, double y, t_session *session);
+t_sprite	create_sprite(t_sprite *prev_sprite, char val, t_session *session);
 void add_sprite(char val, t_session *session);
+double	get_wall_x(t_session *session);
+double	get_wall_y(double ang, double wall_dist, t_session *session);
+unsigned int get_wall_pixel(double x, double y, t_session *session, int
+is_sprite);
+void add_sprite_to_frame_mini(int x_frame, double ang_d, t_sprite *sprites,
+							  t_session *session);
+void add_sprite_to_frame(int x_frame, t_session *session);
+int	is_map_symbol(char c);
+char get_map_elem(t_session *session, int x, int y);
+int	is_map_valid(t_session *session);
+void	free_map(t_list **head);
+void	parse_resolution(t_session *session, char *line);
+int	find_params(t_session *session, char *line, int i);
+void	parse_texture_path(t_session *session, char *line, char t, int t_size);
+void save_map(int fd, t_session *session);
+void	parse_setting_file(char *file_name, t_session *session);
+void	destroy_img(t_img *img, void *mlx_ptr);
+void	destroy_text(t_session *session);
+void	destroy_win(t_win *win);
+void	destroy_ray(t_ray *ray);
+void	destroy_session(t_session *session, char *error_code);
+void init_session(t_session *session);
+int	is_session_valid(t_session *session);
+void	save_player(t_session *session, int x, int y, char direction);
+void	print_view(t_view view);
+int	find_player(t_session *session);
+void	set_window(t_session *session);
+void	init_hooks(t_session *session);
+float movement_length(float ang, t_session *session);
+void movement_handler(double ang, t_session *session);
+
 
 #endif
