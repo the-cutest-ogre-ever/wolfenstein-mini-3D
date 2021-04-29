@@ -1,15 +1,5 @@
 #include "includes.h"
 
-void count_sprite(char cell, t_session *session)
-{
-
-}
-
-char get_map_elem(t_session *session, x, y)
-{
-
-}
-
 char find_ray(int x, int y, t_session *session)
 {
 	if (x < 0 || y < 0)
@@ -97,7 +87,7 @@ int check_next_cell(t_session *session)
 	find_cross(x, y, session);
 	cell = find_ray((int)x_cell, (int)y_cell, session);
 	if (cell == '2')
-		count_sprite(cell, session);
+		add_sprite(cell, session);
 	if (is_map_symbol(cell) == 1 || is_map_symbol(cell) == 2)
 		return (1);
 	else

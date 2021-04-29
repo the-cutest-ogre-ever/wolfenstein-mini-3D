@@ -128,5 +128,7 @@ int esc_handler(t_session *session);
 int		press_handler(int keycode, t_session *session);
 int		release_handler(int keycode, t_session *session);
 void movement_handler(double ang, t_session *session);
+char get_map_elem(t_session *session, int x, int y);
+void add_sprite(char val, t_session *session);
 
 #endif

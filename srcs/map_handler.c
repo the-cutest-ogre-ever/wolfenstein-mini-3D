@@ -13,6 +13,23 @@ int	is_map_symbol(char c)
 	return (0);
 }
 
+char get_map_elem(t_session *session, int x, int y)
+{
+	char	*line;
+	t_list	*head;
+	int x_local;
+
+	x_local = 0;
+	head = session->map;
+	while (head && x_local < x)
+	{
+		x_local++;
+		head = head->next;
+	}
+	line = (char *)head->content;
+	return (line[y]);
+}
+
 static int	check_surround(char *line, char *next, char *prev)
 {
 	int	y;
