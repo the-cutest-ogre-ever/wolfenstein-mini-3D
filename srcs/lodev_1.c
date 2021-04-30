@@ -42,7 +42,7 @@ double get_sprite_x(double x, double y, t_session *session)
 	return (sprite_x / session->blk_x);
 }
 
-t_sprite	create_sprite(t_sprite *prev_sprite, char val, t_session *session)
+t_sprite	*create_sprite(t_sprite *prev_sprite, char val, t_session *session)
 {
 	t_sprite *new_sprite;
 	double x;

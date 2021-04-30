@@ -2,6 +2,7 @@
 # define ERROR_CODES_H
 
 # define ERROR_EMPTY "test error"
+# define ERROR_CUB "invalid config file format"
 # define ERROR_COLOR_C_NEG "invalid cell color format"
 # define ERROR_COLOR_C_OUT "some cell colors are out of bounds"
 # define ERROR_COLOR_F_NEG "invalid floor color format"

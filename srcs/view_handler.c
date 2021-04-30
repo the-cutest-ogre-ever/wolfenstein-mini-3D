@@ -17,12 +17,6 @@ void	save_player(t_session *session, int x, int y, char direction)
 		session->view->view_dir_y = 0;
 }
 
-void	print_view(t_view view)
-{
-	printf("Player info:\n\tx: %d\n\ty: %d\n\tdir: %c\n", view.x, view.y,
-		view.direction);
-}
-
 static int	check_pos(t_session *session, char *line, int max_x)
 {
 	int	y;

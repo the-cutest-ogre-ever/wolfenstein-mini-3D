@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include "../libft/libft.h"
 #include "../minilibx/mlx.h"
-#include "ubuntu_keys.h"
 #include "error_codes.h"
 # define XK_MISCELLANY
 # define XK_LATIN1
@@ -19,7 +18,7 @@
 typedef struct	s_img
 {
 	void	*img_ptr;
-	int		*img_data;
+	void		*img_data;
 	int		width;
 	int 	height;
 	int		size_l;
@@ -125,7 +124,7 @@ double pass_ray(t_session *session, double ang, double m_ang);
 void	free_sprites(t_sprite **sprites);
 t_sprite *get_last_sprite(t_sprite *sprites);
 double get_sprite_x(double x, double y, t_session *session);
-t_sprite	create_sprite(t_sprite *prev_sprite, char val, t_session *session);
+t_sprite	*create_sprite(t_sprite *prev_sprite, char val, t_session *session);
 void add_sprite(char val, t_session *session);
 double	get_wall_x(t_session *session);
 double	get_wall_y(double ang, double wall_dist, t_session *session);

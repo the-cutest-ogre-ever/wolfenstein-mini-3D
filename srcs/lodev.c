@@ -13,7 +13,7 @@ int handle_game(t_session *session)
 		if (!session->img_0 && !session->img_1)
 			destroy_session(session, NULL);
 	}
-	process_key(session);
+	key_handler(session);
 	create_frame(session);
 	mlx_put_image_to_window(session->win->mlx_ptr, session->win->win_ptr,
 							session->img_0->img_ptr, 0, 0);

@@ -28,10 +28,10 @@ void	set_window(t_session *session)
 
 void	init_hooks(t_session *session)
 {
-	mlx_loop_hook(session->win->mlx_ptr, process_game, session);
-	mlx_hook(session->win->win_ptr, 2, 1L << 0, key_press, session);
-	mlx_hook(session->win->win_ptr, 3, 1L << 1, key_release, session);
-	mlx_hook(session->win->win_ptr, 17, 1L << 17, esc_press, session);
+	mlx_loop_hook(session->win->mlx_ptr, handle_game, session);
+	mlx_hook(session->win->win_ptr, 2, 1L << 0, press_handler, session);
+	mlx_hook(session->win->win_ptr, 3, 1L << 1, release_handler, session);
+	mlx_hook(session->win->win_ptr, 17, 1L << 17, esc_handler, session);
 	mlx_loop(session->win->mlx_ptr);
 }
 
@@ -57,7 +57,7 @@ void movement_handler(double ang, t_session *session)
 	if (sin > 0)
 		wall_dist_y = movement_length(M_PI_2, session);
 	else
-		wall_dist_y = movement_handler(-M_PI_2, session);
+		wall_dist_y = movement_length(-M_PI_2, session);
 	if (cos > 0)
 		wall_dist_x = movement_length(0, session);
 	else

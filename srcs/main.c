@@ -1,7 +1,51 @@
 #include "includes.h"
 
+static void is_path_valid(char *file_name)
+{
+	int length;
+
+	length = ft_strlen(file_name);
+	if (length > 4 && (ft_strncmp((file_name + length - 4), ".cub", 4) != 0))
+		print_error(ERROR_CUB);
+}
+
+static void	start(char *congif_file, int save)
+{
+	t_session *session;
+	if (!(session = (t_session *)malloc(sizeof(t_session))))
+		print_error(ERROR_MEMORY);
+	printf("border 0\n");
+	init_session(session);
+	printf("border 1\n");
+	session->win->mlx_ptr = mlx_init();
+	printf("border 2\n");
+	if (!session->win->mlx_ptr)
+		destroy_session(session, ERROR_MEMORY);
+	printf("border 3\n");
+	parse_setting_file(congif_file, session);
+	printf("border 4\n");
+	find_player(session);
+	printf("border 5\n");
+	if (!is_session_valid(session))
+		destroy_session(session, NULL);
+	printf("border 6\n");
+	if (save)
+	{
+		printf("got \"--save\" argument\n");
+	} else
+	{
+		printf("border 7\n");
+		set_window(session);
+		printf("border 8\n");
+		init_hooks(session);
+	}
+}
+
+
 int		main(int argc, char **argv)
 {
+	if (argc > 1)
+		is_path_valid(argv[1]);
 	if (argc == 2)
 		start(argv[1], 0);
 	else if (argc == 3)
@@ -21,42 +65,6 @@ void	session_exit(void)
 	exit(0);
 }
 */
-static void	start(char *congif_file, int save)
-{
-	t_session *session;
-
-	if (!(session = (t_session *)malloc(sizeof(t_session))))
-		print_error(ERROR_MEMORY);
-	init_session(session);
-	if (!(session->win->mlx_ptr = mlx_init()))
-		destroy_session(session, ERR_MEMORY);
-
-	parse_setting_file(congif_file, session);
-	find_player(session);
-
-	//player_init(session);
-	//config_parse(congif_file, session);
-	if (!is_session_valid(session))
-		destroy_session(session, NULL);
-
-	if (save)
-	{
-		/*
-		window_setup_save(cub);
-		if (!cub->frm_0 && !(cub->frm_0 = frame_init(cub->win->mlx_ptr,
-													 cub->win->x, cub->win->y)))
-			cub_destroy(cub, ERR_NO_MEMORY);
-		make_frame(cub);
-		if (!create_bmp_img(cub->frm_0))
-			cub_destroy(cub, NULL);
-		cub_destroy(cub, ERR_NO_ERR);
-		 */
-	} else
-	{
-		set_window(session);
-		init_hooks(session);
-	}
-}
 
 /*
 void	save_frame(char *path_to_conf)

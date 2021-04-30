@@ -10,13 +10,15 @@ LIBS =			-lft -lmlx -lm -lX11 -lXext
 RM =			/bin/rm -rf
 
 INCLUDES_DIR =	$(SRC_DIR) $(LIBFT_DIR) $(MINILIBX_DIR)
-INCLUDES =		$(INCLUDES_DIR)/error_codes.h $(INCLUDES_DIR)/includes.h
+INCLUDES =		$(INCLUDES_DIR)/error_codes.h $(INCLUDES_DIR)/includes.h \
+				$(INCLUDES_DIR)/libft.h $(INCLUDES_DIR)/minilibx.h
 
 SRC_DIR =		./srcs
 SRCS =			$(SRC_DIR)/color_parser.c $(SRC_DIR)/error_handler.c $(SRC_DIR)/keys_handler.c \
-				$(SRC_DIR)/lodev.c $(SRC_DIR)/lodev0.c $(SRC_DIR)/lodev1.c $(SRC_DIR)/lodev2,c \
+				$(SRC_DIR)/lodev.c $(SRC_DIR)/lodev_0.c $(SRC_DIR)/lodev_1.c $(SRC_DIR)/lodev_2.c \
 				$(SRC_DIR)/main.c $(SRC_DIR)/map_handler.c $(SRC_DIR)/parser.c $(SRC_DIR)/session_handler.c \
-				$(SRC_DIR)/validator.c $(SRC_DIR)/view_handler.c $(SRC_DIR)/window_handler.c
+				$(SRC_DIR)/validator.c $(SRC_DIR)/view_handler.c $(SRC_DIR)/window_handler.c \
+				$(SRC_DIR)/initializer.c
 
 
 OBJ_DIR =		./objs

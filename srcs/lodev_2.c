@@ -15,7 +15,7 @@ double	get_wall_x(t_session *session)
 
 double	get_wall_y(double ang, double wall_dist, t_session *session)
 {
-	return (session->view->z + wall_dist * tan(ang)) / session->blk_z);
+	return ((session->view->z + wall_dist * tan(ang)) / session->blk_z);
 }
 
 unsigned int get_wall_pixel(double x, double y, t_session *session, int
@@ -58,7 +58,7 @@ void add_sprite_to_frame_mini(int x_frame, double ang_d, t_sprite *sprites,
 		{
 			pxl = get_wall_pixel(sprites->sprite_x, get_wall_y(ang,
 													  sprites->sprite_dist,
-													  session), session, 1));
+													  session), session, 1);
 			if (pxl != 0)
 				((unsigned int *)session->img_0->img_data)[y_frame *
 				session->win->x + x_frame] = pxl;

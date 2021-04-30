@@ -70,31 +70,3 @@ void	destroy_session(t_session *session, char *error_code)
 	free(session);
 	print_error(error_code);
 }
-
-void init_session(t_session *session)
-{
-	session = (t_session *)malloc(sizeof(t_session));
-	if (!session)
-		destroy_session(session, ERROR_MEMORY);
-	session->win = (t_win *) malloc(sizeof (t_win));
-	if (!session->win)
-		destroy_session(session, ERROR_MEMORY);
-	session->view = (t_view *) malloc(sizeof (t_view));
-	if (!session->view)
-		destroy_session(session, ERROR_MEMORY);
-	session->ray = (t_ray *) malloc(sizeof (t_ray));
-	if (!session->ray)
-		destroy_session(session, ERROR_MEMORY);
-	session->map = NULL;
-	session->view->direction = '0';
-	session->resolution[0] = -1;
-	session->resolution[1] = -1;
-	session->ceiling_color[0] = -1;
-	session->ceiling_color[1] = -1;
-	session->ceiling_color[2] = -1;
-	session->floor_color[0] = -1;
-	session->floor_color[1] = -1;
-	session->floor_color[2] = -1;
-	session->img_0 = NULL;
-	session->img_1 = NULL;
-}
